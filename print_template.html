@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="it">
+
+  <head>
+    <title>Configurazione PC</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index,follow">
+    <meta name="generator" content="GrapesJS Studio">
+    
+    <style>
+        /* ==========================================================================
+           1. LOCAL FONTS SETUP (Loaded from local .ttf files in the same directory)
+           ========================================================================== */
+        @font-face {
+            font-family: 'Inter';
+            src: url('Inter_18pt-Regular.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Inter';
+            src: url('Inter_18pt-Medium.ttf') format('truetype');
+            font-weight: 500;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Inter';
+            src: url('Inter_18pt-SemiBold.ttf') format('truetype');
+            font-weight: 600;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Inter';
+            src: url('Inter_18pt-Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Inter';
+            src: url('Inter_18pt-ExtraBold.ttf') format('truetype');
+            font-weight: 800;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'IBM Plex Mono';
+            src: url('IBMPlexMono-Medium.ttf') format('truetype');
+            font-weight: 500;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'IBM Plex Mono';
+            src: url('IBMPlexMono-SemiBold.ttf') format('truetype');
+            font-weight: 600;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'IBM Plex Mono';
+            src: url('IBMPlexMono-Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+
+		/* ==========================================================================
+           2. PRINT SETUP & PAGE CONFIGURATION
+           ========================================================================== */
+        @page {
+            size: A4 portrait;
+            margin: 15mm;
+        }
+
+        @media print {
+            body { 
+                -webkit-print-color-adjust: exact !important; 
+                print-color-adjust: exact !important; 
+            }
+            .app-icon-wrap {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                background-color: #003366 !important;
+            }
+            .app-icon {
+                background: transparent !important;
+            }
+            .no-print { 
+                display: none; 
+            }
+        }
+
+        body {
+            /* Forced fallback to native Windows modern fonts to prevent Edge headless blocking */
+            font-family: 'Segoe UI', 'Inter', Tahoma, Geneva, Verdana, sans-serif !important;
+            color: #1a1a1a;
+            line-height: 1.4;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+
+        .mono-font, .app-inline-key-value {
+            /* Forced monospace fallback for Product Keys */
+            font-family: 'Consolas', 'IBM Plex Mono', 'Courier New', monospace !important;
+        }
+		
+        /* ==========================================================================
+           3. HEADER STRUCTURE
+           ========================================================================== */
+        .main-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 4px solid #f37021; 
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .header-logo {
+            height: 50px;
+        }
+
+        .header-title-group {
+            text-align: right;
+        }
+
+        .document-title {
+            margin: 0;
+            font-size: 22pt;
+            font-weight: 800;
+            color: #003366; 
+            text-transform: uppercase;
+        }
+
+        .document-subtitle {
+            margin: 4px 0 0 0;
+            font-size: 10pt;
+            font-weight: 600;
+            color: #f37021;
+        }
+
+        /* ==========================================================================
+           4. INFO METADATA BAR
+           ========================================================================== */
+        .info-bar {
+            background-color: #f8f9fa;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-bottom: 25px;
+        }
+
+        .apps-title {
+            margin: 0 0 10px 0;
+            font-size: 12pt;
+            font-weight: 700;
+            color: #003366;
+        }
+
+        .apps-subrow {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .apps-meta {
+            font-size: 10pt;
+            color: #4b5563;
+        }
+
+        .apps-meta strong {
+            color: #1a1a1a;
+        }
+
+        /* ==========================================================================
+           5. APPLICATION STACK & CARDS
+           ========================================================================== */
+        .app-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .app-row {
+            display: flex;
+            align-items: center;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #ffffff;
+            page-break-inside: avoid;
+        }
+
+        .app-icon-wrap {
+            width: 56px;
+            height: 56px;
+            background-color: #003366;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .app-icon {
+            max-width: 32px;
+            max-height: 32px;
+            object-fit: contain;
+        }
+
+        .app-content {
+            padding: 12px 18px;
+            flex-grow: 1;
+        }
+
+        .app-name {
+            font-size: 11pt;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .app-desc {
+            font-size: 9pt;
+            color: #6b7280;
+            margin-top: 2px;
+        }
+
+        /* Inline structures specifically styled for licenses (Slots 08 and 09) */
+        .app-inline-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding-right: 18px;
+        }
+
+        .app-inline-left {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .app-inline-key {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .app-extra-label {
+            font-size: 7pt;
+            font-weight: 700;
+            color: #9ca3af;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .app-inline-key-value {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12pt;
+            font-weight: 600;
+            color: #000000;
+            background-color: #f3f4f6;
+            border: 1px solid #e5e7eb;
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin-top: 3px;
+            letter-spacing: 0.5px;
+        }
+
+        .mono-font {
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        /* ==========================================================================
+           6. FOOTER & WARNING BOX
+           ========================================================================== */
+        .footer-item {
+            margin-top: 30px;
+            border: 2px dashed #f37021;
+            padding: 12px;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: 600;
+            color: #003366;
+            font-size: 10pt;
+            page-break-inside: avoid;
+        }
+
+        footer.footer {
+            margin-top: 25px;
+            padding-top: 12px;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            font-size: 9pt;
+            color: #6b7280;
+            page-break-inside: avoid;
+        }
+
+        footer.footer b {
+            color: #1a1a1a;
+        }
+        
+        footer.footer .footer-item {
+            margin-top: 0;
+            border: none;
+            padding: 0;
+            font-weight: normal;
+            color: #6b7280;
+        }
+    </style>
+  </head>
+
+  <body class="gjs-t-body body-font cls-r29ei2" id="ipj1">
+    <div class="print-wrap page-container" id="i9o4l">
+      
+      <header class="main-header" id="it3cm">
+        <div id="igtpl" class="brand-area">
+          <img src="logo_unieuro.png" alt="Unieuro" id="i59um" class="header-logo" />
+        </div>
+        <div class="header-title-group" id="i0cdj">
+          <h1 class="gjs-t-h1 document-title" id="itqmx">Configurazione PC</h1>
+          <p class="document-subtitle" id="i1eng">Documento Tecnico di Riepilogo</p>
+        </div>
+      </header>
+
+      <section id="iroep" class="info-bar apps-head">
+        <div id="i14gyj" class="apps-heading-block">
+          <h2 id="iiyrj2" class="gjs-t-h2 apps-title">Applicazioni installate:</h2>
+          <div id="io15ic" class="apps-subrow">
+            <div id="i9naye" class="apps-meta">S/N: <strong id="i477tb">{{PC_SERIAL}}</strong></div>
+            <div id="itd9pm" class="apps-meta">User Windows: <strong id="im1zwh">{{LOCAL_ACCOUNT}}</strong></div>
+            <div id="izg8ot" class="apps-meta">Data: <strong id="infhzs">{{DATA_STAMPA}}</strong></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="iuo1i" class="credential-cards app-stack">
+        
+        <article id="ipdqa2" class="gjs-t-border app-row">
+          <div id="i3hg5f" class="app-icon-wrap">
+            <img src="logo_7zip.png" alt="7-Zip" id="ips03p" class="app-icon" />
+          </div>
+          <div id="izykwc" class="app-content">
+            <div id="iaml4m" class="app-name">{{APPLICATION_01}}</div>
+            <div class="app-desc" id="ijrxrj">{{DESCRIPTION_01}}</div>
+          </div>
+        </article>
+
+        <article id="ibcjgk" class="gjs-t-border app-row">
+          <div id="iaw3og" class="app-icon-wrap">
+            <img src="logo_acrobat.png" alt="Acrobat Reader" id="i6wt88" class="app-icon" />
+          </div>
+          <div id="iv0txf" class="app-content">
+            <div id="inxf3d" class="app-name">{{APPLICATION_02}}</div>
+            <div class="app-desc" id="ihrdkq">{{DESCRIPTION_02}}</div>
+          </div>
+        </article>
+
+        <article id="i6nucu" class="gjs-t-border app-row">
+          <div id="i819l5" class="app-icon-wrap">
+            <img src="logo_firefox.png" alt="Firefox" id="idqgdq" class="app-icon" />
+          </div>
+          <div id="i8nu1s" class="app-content">
+            <div id="ig1vyf" class="app-name">{{APPLICATION_03}}</div>
+            <div class="app-desc" id="i65ypq">{{DESCRIPTION_03}}</div>
+          </div>
+        </article>
+
+        <article id="iaqqe3" class="gjs-t-border app-row">
+          <div id="iid2ec" class="app-icon-wrap">
+            <img src="logo_chrome.png" alt="Google Chrome" id="ibfxf6" class="app-icon" />
+          </div>
+          <div id="igro6u" class="app-content">
+            <div id="ia5axg" class="app-name">{{APPLICATION_04}}</div>
+            <div class="app-desc" id="ib44eh">{{DESCRIPTION_04}}</div>
+          </div>
+        </article>
+
+        <article id="i1wppw" class="gjs-t-border app-row">
+          <div id="i547lh" class="app-icon-wrap">
+            <img src="logo_paintnet.png" alt="Paint.Net" id="ibq51s" class="app-icon" />
+          </div>
+          <div id="inysgj" class="app-content">
+            <div id="id0pb9" class="app-name">{{APPLICATION_05}}</div>
+            <div class="app-desc" id="i969yk">{{DESCRIPTION_05}}</div>
+          </div>
+        </article>
+
+        <article id="ivgdlh" class="gjs-t-border app-row">
+          <div id="i4fyt7" class="app-icon-wrap">
+            <img src="logo_pdfcreator.png" alt="PDFCreator" id="iuemm7" class="app-icon" />
+          </div>
+          <div id="iimj41" class="app-content">
+            <div id="iromig" class="app-name">{{APPLICATION_06}}</div>
+            <div class="app-desc" id="i5jymg">{{DESCRIPTION_06}}</div>
+          </div>
+        </article>
+
+        <article id="ivtu3b" class="gjs-t-border app-row">
+          <div id="iivzp3" class="app-icon-wrap">
+            <img src="logo_vlc.png" alt="VLC" id="izc6zh" class="app-icon" />
+          </div>
+          <div id="ibzbi7" class="app-content">
+            <div id="ih7m85" class="app-name">{{APPLICATION_07}}</div>
+            <div class="app-desc" id="ij27y9">{{DESCRIPTION_07}}</div>
+          </div>
+        </article>
+
+        <article id="im45d" class="gjs-t-border app-row" style="display: {{SHOW_OFFICE}};">
+          <div id="ikp00h" class="app-icon-wrap">
+            <img src="{{OFFICE_LOGO_URL}}" alt="Office Logo" id="il2dd1" class="app-icon" />
+          </div>
+          <div id="iv0apc" class="app-content app-inline-main">
+            <div id="i92wys" class="app-inline-left">
+              <div id="irqn95" class="app-name app-inline-title">{{APPLICATION_08}}</div>
+              <div id="izsst9" class="app-desc app-inline-desc">{{DESCRIPTION_08}}</div>
+            </div>
+            <div id="iapp8key" class="app-extra mono-font app-inline-key">
+              <span id="iris5y" class="app-extra-label">Product Key</span>
+              <span id="ierlpg" class="app-inline-key-value">{{OFFICE_KEY}}</span>
+            </div>
+          </div>
+        </article>
+
+        <article id="ii3hl" class="gjs-t-border app-row" style="display: {{SHOW_AV}};">
+          <div id="iyy0zw" class="app-icon-wrap">
+            <img src="{{AV_LOGO_URL}}" alt="Antivirus Logo" id="ijnrt2" class="app-icon" />
+          </div>
+          <div id="ihx4hg" class="app-content app-inline-main">
+            <div id="icgwij" class="app-inline-left">
+              <div id="itgt0j" class="app-name app-inline-title">{{APPLICATION_09}}</div>
+              <div id="i2hhj2" class="app-desc app-inline-desc">{{DESCRIPTION_09}}</div>
+            </div>
+            <div id="iapp9key" class="app-extra mono-font app-inline-key">
+              <span id="ifkqa9" class="app-extra-label">Product Key</span>
+              <span id="ipwgcg" class="app-inline-key-value">{{AV_KEY}}</span>
+            </div>
+          </div>
+        </article>
+
+      </section>
+
+      <section id="iix2n" class="footer-item body-font">Conservare questo documento per eventuali reinstallazioni.</section>
+      
+      <footer id="i239g" class="footer">
+        <div id="ituwl">Operatore: <b id="itu8s" class="cls-4ud2he">{{OPERATOR_ID}}</b></div>
+        <div id="im6nl">Store ID: <b id="ip96k" class="cls-7mfwgh">{{STORE_ID}}</b></div>
+        <div id="iyonl" class="footer-item">Servizio AvvioPC 2.0</div>
+      </footer>
+
+    </div>
+  </body>
+
+</html>
